@@ -230,6 +230,7 @@
 
                 <p>
                   ${user.getNameUser()}
+                  ${user.getIdRole().getNameRole()}
                   <small>${user.getEmail()}</small>
                 </p>
               </li>
