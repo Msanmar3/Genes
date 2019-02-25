@@ -32,25 +32,37 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <!--<li class="header">MENÚ</li>-->
-            <li class="active treeview menu-open">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
+            <a href = "<c:url value = "/data/prueba.txt"/>">TEST</a>
+            <li class="treeview">
                 <c:choose> 
                     <c:when test="${fn:length(listRolesMenu) gt 0}">
                         <c:forEach items="${listRolesMenu}" var="menu">
-                            <ul class="treeview-menu">
-                          
-                                <li>
-                                    <a href="${menu.getIdMenu().getAction()}">
-                                        <i class="${menu.getIdMenu().getIcon()}"></i> 
-                                        ${menu.getIdMenu().getNameMenu()}
-                                    </a>
-                                </li>
-                            </ul>
+                            <!--Si es padre (0) se pinta con el desplegable-->
+                            <c:if test="${menu.getIdMenu().getIdParent() < 1}">
+                                <a href="">
+                                    <i class="${menu.getIdMenu().getIcon()}"></i> 
+                                    <span> ${menu.getIdMenu().getNameMenu()}</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <!--Pintamos los hijos-->
+                                <ul class="treeview-menu">
+                                    <c:forEach items="${listRolesMenu}" var="menuHijo">
+                                        <!--el id del padre del hijo coincide con el id del padre-->
+                                        <c:if test = "${(menuHijo.getIdMenu().getPosition()>0) && (menuHijo.getIdMenu().getIdParent()== menu.getIdMenu().getIdMenu())}">
+
+                                            <li>
+                                                <a href="${menuHijo.getIdMenu().getAction()}">
+                                                    <i class="${menuHijo.getIdMenu().getIcon()}"></i> 
+                                                    ${menuHijo.getIdMenu().getNameMenu()}
+                                                </a>
+                                            </li>
+
+                                        </c:if>
+                                    </c:forEach> 
+                                </ul>
+                            </c:if>
                         </c:forEach> 
                     </c:when>  
                     <c:otherwise>  

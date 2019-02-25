@@ -19,11 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 public class UsersJpaController implements Serializable {
 
@@ -242,5 +243,32 @@ public class UsersJpaController implements Serializable {
             em.close();
         }
 
+    }
+
+    //Si sale el error javax.persistence.NoResultException: getSingleResult() did not retrieve any entities.
+    //hay que meter el try catch
+    public Users findCreateUser(String email) {
+        EntityManager em = getEntityManager();
+        try {
+            return (Users) em.createNamedQuery("Users.findCreateUser").setParameter("email", email).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Users> findAllUsers() {
+        EntityManager em = getEntityManager();
+        List<Users> listUsers = new ArrayList<Users>();
+        try {
+            listUsers.add((Users)em.createNamedQuery("Users.findAll").getSingleResult());
+        } catch (NoResultException e) {
+            return null;
+        } finally {
+            em.close();
+        }
+        
+        return listUsers;
     }
 }

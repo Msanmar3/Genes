@@ -19,22 +19,27 @@ import java.util.List;
 import com.upo.genesmaven.entities.RolesMenus;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 public class RolesJpaController implements Serializable {
 
     public RolesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("genes_PU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
+    public RolesJpaController() {
+    }
+
+    
     public void create(Roles roles) {
         if (roles.getUsersList() == null) {
             roles.setUsersList(new ArrayList<Users>());

@@ -16,20 +16,25 @@ import com.upo.genesmaven.entities.Users;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 public class FilesJpaController implements Serializable {
 
     public FilesJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("genes_PU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+
+    public FilesJpaController() {
+        emf.createEntityManager();
     }
 
     public void create(Files files) {

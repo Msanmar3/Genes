@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 @Entity
 @Table(name = "menus", catalog = "genevalidator", schema = "", uniqueConstraints = {

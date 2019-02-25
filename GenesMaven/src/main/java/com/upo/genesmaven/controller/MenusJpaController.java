@@ -18,17 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 public class MenusJpaController implements Serializable {
 
     public MenusJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    private EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("genes_PU");
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

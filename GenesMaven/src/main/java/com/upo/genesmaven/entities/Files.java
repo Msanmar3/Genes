@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 @Entity
 @Table(name = "files", catalog = "genevalidator", schema = "", uniqueConstraints = {

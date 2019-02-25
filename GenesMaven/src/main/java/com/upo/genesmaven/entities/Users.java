@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 @Entity
 @Table(name = "users", catalog = "genevalidator", schema = "", uniqueConstraints = {
@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
     , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
     , @NamedQuery(name = "Users.findUserLogin", query = "SELECT u FROM Users u WHERE u.email = :email and u.password = :password ")
+    , @NamedQuery(name = "Users.findCreateUser", query = "SELECT u FROM Users u WHERE u.email = :email")
 })
 public class Users implements Serializable {
 

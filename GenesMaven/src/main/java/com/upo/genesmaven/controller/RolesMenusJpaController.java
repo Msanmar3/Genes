@@ -21,7 +21,7 @@ import javax.persistence.Persistence;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 public class RolesMenusJpaController implements Serializable {
 
@@ -37,9 +37,7 @@ public class RolesMenusJpaController implements Serializable {
     public RolesMenusJpaController() {
         emf.createEntityManager();
     }
-    
-    
-
+   
     public void create(RolesMenus rolesMenus) {
         EntityManager em = null;
         try {

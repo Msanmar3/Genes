@@ -16,8 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.upo.genesmaven.entities.Users;
+import com.upo.genesmaven.services.Sha1;
+import com.upo.genesmaven.user.servletCreateUser;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -38,49 +43,62 @@ public class servletLogin extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         String redirect = "error.jsp";
+        //si irme a la tabla de eventos  comprobar q no se este actualizando la bd, alomejor el estado tiene q ser string en vez de boolean, tynint puedo ponerle numeros
+//        if (session != null) {
 
-        if (session != null) {
-            request.getSession().removeAttribute("errorLogin");
-            String em = request.getParameter("email");
-            String password = request.getParameter("password");
-            if (((Objects.requireNonNull(em) == null ? em == null : Objects.requireNonNull(em).equals(em)) && !em.isEmpty())
-                    && ((Objects.requireNonNull(password) == null ? password == null : Objects.requireNonNull(password).equals(password)) && !password.isEmpty())) {
+        request.getSession().removeAttribute("errorLogin");
+        String em = request.getParameter("email");
+        String password = request.getParameter("password");
+        if (((Objects.requireNonNull(em) == null ? em == null : Objects.requireNonNull(em).equals(em)) && !em.isEmpty())
+                && ((Objects.requireNonNull(password) == null ? password == null : Objects.requireNonNull(password).equals(password)) && !password.isEmpty())) {
 
-                UsersJpaController ujpc = new UsersJpaController();
-                RolesMenusJpaController rmpc = new RolesMenusJpaController();
+            UsersJpaController ujpc = new UsersJpaController();
+            RolesMenusJpaController rmpc = new RolesMenusJpaController();
 
-                Users user = ujpc.findUsersLogin(em, password);
+            try {
+                password = Sha1.sha1(password);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(servletCreateUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-                if (user != null) {
+            Users user = ujpc.findUsersLogin(em, password);
 
-                    user = ujpc.findUsers(user.getIdUser());
-   
-                    List<RolesMenus> listRolesMenu = rmpc.findRolesMenuByIdRol(user.getIdRole());
-                 
-                    request.getSession().removeAttribute("user");
-                    request.getSession().setAttribute("user", user);
-                    
-                    request.getSession().removeAttribute("listRolesMenu");
-                    request.getSession().setAttribute("listRolesMenu", listRolesMenu);
-                    
-                    request.getSession().removeAttribute("section");
-                    request.getSession().setAttribute("section", "central.jsp");
-                    redirect = "inicio.jsp";
-                } else {
-                    request.getSession().removeAttribute("errorLogin");
-                    request.getSession().setAttribute("errorLogin", "Los datos son incorrectos.");
-                    redirect = "index.jsp";
+            if (user != null) {
 
-                }
+                user = ujpc.findUsers(user.getIdUser());
 
+                List<RolesMenus> listRolesMenu = rmpc.findRolesMenuByIdRol(user.getIdRole());
+
+                request.getSession().removeAttribute("user");
+                request.getSession().setAttribute("user", user);
+
+                request.getSession().removeAttribute("listRolesMenu");
+                request.getSession().setAttribute("listRolesMenu", listRolesMenu);
+
+                request.getSession().removeAttribute("section");
+                request.getSession().setAttribute("section", "central.jsp");
+                redirect = "inicio.jsp";
             } else {
-                request.getSession().removeAttribute("errorLogin");
-                request.getSession().setAttribute("errorLogin", "Introduzca usuario y contraseña.");
+//                    request.getSession().removeAttribute("errorLogin");
+//                    request.getSession().setAttribute("errorLogin", "Los datos son incorrectos.");
+//                    redirect = "index.jsp";
+                request.getSession().removeAttribute("errorCreateUser");
+                request.getSession().setAttribute("errorCreateUser", "El usuario o la contraseña son incorrectas");
+//                    request.getSession().removeAttribute("section");
+//                    request.getSession().setAttribute("section", "central.jsp");
                 redirect = "index.jsp";
             }
-           response.sendRedirect(redirect);
 
+        } else {
+             request.getSession().removeAttribute("errorCreateUser");
+                request.getSession().setAttribute("errorCreateUser", "Introduzca usuario y contraseña");
+//            request.getSession().removeAttribute("errorLogin");
+//            request.getSession().setAttribute("errorLogin", "Introduzca usuario y contraseña.");
+            redirect = "index.jsp";
         }
+        response.sendRedirect(redirect);
+
+//        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author antonio
+ * @author Mónica Sánchez Martín
  */
 @Entity
 @Table(name = "roles_menus", catalog = "genevalidator", schema = "", uniqueConstraints = {
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "RolesMenus.findAll", query = "SELECT r FROM RolesMenus r")
     , @NamedQuery(name = "RolesMenus.findByIdRoleMenu", query = "SELECT r FROM RolesMenus r WHERE r.idRoleMenu = :idRoleMenu")
-    ,@NamedQuery(name = "RolesMenus.findByIdRole", query = "SELECT r FROM RolesMenus r WHERE r.idRole = :idRole")
+    ,@NamedQuery(name = "RolesMenus.findByIdRole", query = "SELECT r FROM RolesMenus r WHERE r.idRole = :idRole ")
 })
 public class RolesMenus implements Serializable {
 

@@ -18,7 +18,4 @@
 <script src="app/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <!-- ChartJS -->
 <script src="app/bower_components/chart.js/Chart.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="app/dist/js/pages/dashboard2.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="app/dist/js/demo.js"></script>
+<script type="text/javascript" src="lib/jquery-validation/dist/jquery.validate.js"></script>

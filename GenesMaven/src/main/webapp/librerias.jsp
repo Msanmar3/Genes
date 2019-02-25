@@ -1,7 +1,6 @@
 <%-- 
     Document   : librerias
-    Created on : 10-nov-2018, 12:35:11
-    Author     : winlatop
+    Author     : Mónica Sánchez Martín
 --%>
 <link rel="stylesheet" href="app/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -18,3 +17,4 @@
  <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <link rel="stylesheet" href="css/genescss.css">

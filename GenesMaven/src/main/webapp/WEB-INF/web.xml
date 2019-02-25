@@ -36,10 +36,7 @@
         <servlet-name>sertvletFormCompareGenes</servlet-name>
         <servlet-class>controller.data.sertvletFormCompareGenes</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>servletLogout</servlet-name>
-        <servlet-class>controller.servletLogout</servlet-class>
-    </servlet>
+  
     <servlet>
         <servlet-name>servletFormCreateUser</servlet-name>
         <servlet-class>controller.user.servletFormCreateUser</servlet-class>
@@ -52,11 +49,75 @@
         <servlet-name>servletFormCreateUserIndex</servlet-name>
         <servlet-class>controller.user.servletFormCreateUserIndex</servlet-class>
     </servlet>-->
+    <servlet>
+        <servlet-name>servletLogout</servlet-name>
+        <servlet-class>controller.servletLogout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletFormCreateUser</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletFormCreateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletCreateUser</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletCreateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletFormUpdateUser</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletFormUpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletListUsers</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletListUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletDeleteUser</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletDeleteUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletUpdateUser</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletUpdateUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletFormCreateUserIndex</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletFormCreateUserIndex</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletCreateUserIndex</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletCreateUserIndex</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletFormPerfil</servlet-name>
+        <servlet-class>com.upo.genesmaven.user.servletFormPerfil</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletFormLoadData</servlet-name>
+        <servlet-class>com.upo.genesmaven.data.servletFormLoadData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sertvletFormCompareGenes</servlet-name>
+        <servlet-class>com.upo.genesmaven.data.sertvletFormCompareGenes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sertvletCompareGenes</servlet-name>
+        <servlet-class>com.upo.genesmaven.data.sertvletCompareGenes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletLoadData</servlet-name>
+        <servlet-class>com.upo.genesmaven.data.servletLoadData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletUpdateGenes</servlet-name>
+        <servlet-class>com.upo.genesmaven.genes.servletUpdateGenes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletReturnDash</servlet-name>
+        <servlet-class>com.upo.genesmaven.navegation.servletReturnDash</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletLogin</servlet-name>
         <url-pattern>/servletLogin</url-pattern>
     </servlet-mapping>
-<!--    <servlet-mapping>
+    <!--    <servlet-mapping>
         <servlet-name>servletListUsers</servlet-name>
         <url-pattern>/servletListUsers</url-pattern>
     </servlet-mapping>
@@ -88,10 +149,7 @@
         <servlet-name>sertvletFormCompareGenes</servlet-name>
         <url-pattern>/sertvletFormCompareGenes</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>servletLogout</servlet-name>
-        <url-pattern>/servletLogout</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>servletFormCreateUser</servlet-name>
         <url-pattern>/servletFormCreateUser</url-pattern>
@@ -104,6 +162,70 @@
         <servlet-name>servletFormCreateUserIndex</servlet-name>
         <url-pattern>/servletFormCreateUserIndex</url-pattern>
     </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>servletLogout</servlet-name>
+        <url-pattern>/servletLogout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletFormCreateUser</servlet-name>
+        <url-pattern>/servletFormCreateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletCreateUser</servlet-name>
+        <url-pattern>/servletCreateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletFormUpdateUser</servlet-name>
+        <url-pattern>/servletFormUpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletListUsers</servlet-name>
+        <url-pattern>/servletListUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletDeleteUser</servlet-name>
+        <url-pattern>/servletDeleteUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletUpdateUser</servlet-name>
+        <url-pattern>/servletUpdateUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletFormCreateUserIndex</servlet-name>
+        <url-pattern>/servletFormCreateUserIndex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletCreateUserIndex</servlet-name>
+        <url-pattern>/servletCreateUserIndex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletFormPerfil</servlet-name>
+        <url-pattern>/servletFormPerfil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletFormLoadData</servlet-name>
+        <url-pattern>/servletFormLoadData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sertvletFormCompareGenes</servlet-name>
+        <url-pattern>/sertvletFormCompareGenes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sertvletCompareGenes</servlet-name>
+        <url-pattern>/sertvletCompareGenes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletLoadData</servlet-name>
+        <url-pattern>/servletLoadData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletUpdateGenes</servlet-name>
+        <url-pattern>/servletUpdateGenes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletReturnDash</servlet-name>
+        <url-pattern>/servletReturnDash</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -112,4 +234,5 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+    
 </web-app>

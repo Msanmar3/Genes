@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 public class servletLogout extends HttpServlet {
 
