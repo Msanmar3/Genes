@@ -16,13 +16,10 @@ import com.upo.genesmaven.user.servletCreateUser;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -119,21 +116,13 @@ public class servletLoadData extends HttpServlet {
                 } catch (Exception ex) {
                     request.setAttribute("message", "There was an error: " + ex.getMessage());
                 }
-                /*
-                    private Integer idFile;
-                    private String nameFile;
-                    private boolean isHead;
-                    private String url;
-                    private Date created;
-                    private Users idUser;
-                 */
                 //Guardamos los datos del fichero en la BD
-                String us = (String) request.getSession().getAttribute("user");
+                Users us = (Users) request.getSession().getAttribute("user");
 
-                if ((Objects.requireNonNull(us) == null ? us == null : Objects.requireNonNull(us).equals(us)) && !us.isEmpty()) {
+                if ((Objects.requireNonNull(us) == null ? us == null : Objects.requireNonNull(us).equals(us))) {
 
                     UsersJpaController ujpc = new UsersJpaController();
-                    Users user = ujpc.findCreateUser(us);
+                    Users user = ujpc.findCreateUser(us.getEmail());
 
                     FilesJpaController fjpc = new FilesJpaController();
                     Files file = new Files();
@@ -142,6 +131,7 @@ public class servletLoadData extends HttpServlet {
                         file.setIdUser(user);
                         file.setCreated(new Date());
                         file.setNameFile(fileName);
+                        file.setUrl(filePath);
                         fjpc.create(file);
                         request.getSession().removeAttribute("section");
                         request.getSession().setAttribute("section", "sectionResultUpload.jsp");
