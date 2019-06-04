@@ -118,6 +118,5 @@ public class Gen extends BaseMongoDO {
         return "Gen{" + "origin=" + origin + ", file=" + file + ", geneA=" + geneA + ", geneB=" + geneB + ", weight=" + weight + '}';
     }
     
-    
-    
+   
 }

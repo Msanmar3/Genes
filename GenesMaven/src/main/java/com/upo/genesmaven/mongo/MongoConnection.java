@@ -5,19 +5,21 @@
  */
 package com.upo.genesmaven.mongo;
 
+import com.google.gson.Gson;
 import static java.lang.String.format;
 
 import org.apache.log4j.Logger;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.bson.Document;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
 import com.mongodb.WriteConcern;
+import com.mongodb.client.MongoCollection;
 import com.upo.genesmaven.models.Gen;
-
 
 /**
  *
@@ -31,7 +33,7 @@ public class MongoConnection {
     private MongoClient mongo = null;
     private Datastore dataStore = null;
     private Morphia morphia = null;
-    private String dataBaseName=null;
+    private String dataBaseName = null;
 
     private MongoConnection() {
     }
@@ -43,7 +45,7 @@ public class MongoConnection {
                     .connectionsPerHost(4)
                     .maxConnectionIdleTime((60 * 1_000))
                     .maxConnectionLifeTime((120 * 1_000));
-            ;
+            
 
             MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/genesvalidator", options);
 
@@ -72,8 +74,7 @@ public class MongoConnection {
                     .connectionsPerHost(4)
                     .maxConnectionIdleTime((60 * 1_000))
                     .maxConnectionLifeTime((120 * 1_000));
-            ;
-
+            
             MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/" + dataBaseName, options);
 
             logger.info("About to connect to MongoDB @ " + uri.toString());
@@ -93,7 +94,7 @@ public class MongoConnection {
 
         return mongo;
     }
-    
+
     public Morphia getMorphia() {
         if (morphia == null) {
             logger.debug("Starting Morphia");
@@ -120,11 +121,12 @@ public class MongoConnection {
         if (dataStore == null) {
             logger.debug(format("Starting DataStore on DB: %s", dbName));
             dataStore = getMorphia().createDatastore(getMongo(), dbName);
+
         }
 
         return dataStore;
     }
-    
+
     public void init() {
         logger.debug("Bootstraping");
         getMongo();
@@ -161,5 +163,24 @@ public class MongoConnection {
         this.dataBaseName = dataBaseName;
     }
 
+    public void insertCollection(Document gen, String nameCollection) {
+
+        MongoCollection<Document> collection = getMongo().getDatabase(dataBaseName).getCollection(nameCollection);
+
+        collection.insertOne(gen);
+
+    }
     
+    public void insertCollection(Document gen, String nameCollection, String dataBaseName) {
+
+        MongoCollection<Document> collection = getMongo().getDatabase(dataBaseName).getCollection(nameCollection);
+
+        collection.insertOne(gen);
+
+    }
+
+    public void createCollection(String dataBaseName, String nameCollection) {
+
+        getMongo().getDatabase(dataBaseName).createCollection(nameCollection);
+    }
 }

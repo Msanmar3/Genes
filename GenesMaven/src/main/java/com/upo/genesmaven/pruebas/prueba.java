@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 public class prueba {
 
@@ -24,7 +24,7 @@ public class prueba {
         String geneDir="data";
         String geneFile="genes.txt";
         String geneOut = "C:\\Users\\winlatop\\Documents\\NetBeansProjects\\Monica\\Genes\\GenesMaven\\src\\main\\webapp\\" + geneDir + "\\" + geneFile;
-        d.importDataUser(geneOut, geneDir + "_" + geneFile, geneFile, "genesUser");
+//        d.importDataUser(geneOut, geneDir + "_" + geneFile, geneFile, "genesUser");
     }
     
 }

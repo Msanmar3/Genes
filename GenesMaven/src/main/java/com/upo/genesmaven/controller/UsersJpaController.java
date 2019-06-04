@@ -242,7 +242,6 @@ public class UsersJpaController implements Serializable {
         } finally {
             em.close();
         }
-
     }
 
     //Si sale el error javax.persistence.NoResultException: getSingleResult() did not retrieve any entities.

@@ -57,6 +57,7 @@ public class servletLoadData extends HttpServlet {
 
         if (session != null) {
             request.getSession().removeAttribute("errorLoadData");
+            Users us = (Users) request.getSession().getAttribute("user");
 
             if (ServletFileUpload.isMultipartContent(request)) {
 
@@ -98,52 +99,45 @@ public class servletLoadData extends HttpServlet {
                                 hmap.put(fieldName, fieldValue);
                             }
                         }
-                        System.out.println(hmap);
 
-                        try {
-                            d.importDataUser(filePath, hmap.get("origin"), hmap.get("firstName") + "_" + hmap.get("secondName"), "genesUser");
+                        if (hmap.get("origin") != null && hmap.get("firstName") != null && hmap.get("secondName") != null) {
+                            try {
+                                d.importDataUser(filePath, hmap.get("origin"), hmap.get("firstName") + "_" + hmap.get("secondName"), "genesUser", us);
 
-                        } catch (FileNotFoundException e) {
-                            File f = new File(filePath);
-                            f.delete();
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            File f = new File(filePath);
-                            f.delete();
-                            e.printStackTrace();
+                                UsersJpaController ujpc = new UsersJpaController();
+                                Users user = ujpc.findCreateUser(us.getEmail());
+
+                                FilesJpaController fjpc = new FilesJpaController();
+                                Files file = new Files();
+                                if (user != null) {
+
+                                    file.setIdUser(user);
+                                    file.setCreated(new Date());
+                                    file.setNameFile(fileName);
+                                    file.setUrl(filePath);
+                                    fjpc.create(file);
+                                    request.getSession().removeAttribute("section");
+                                    request.getSession().setAttribute("section", "sectionResultUpload.jsp");
+                                    redirect = "inicio.jsp";
+
+                                    response.sendRedirect("sectionResultUpload.jsp");
+                                }
+                            } catch (FileNotFoundException e) {
+                                File f = new File(filePath);
+                                f.delete();
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                File f = new File(filePath);
+                                f.delete();
+                                e.printStackTrace();
+                            }
+                        } else {
+                            request.getSession().removeAttribute("errorUpdateFile");
+                            request.getSession().setAttribute("errorUpdateFile", "Rellene todos los campos obligatorios");
                         }
                     }
                 } catch (Exception ex) {
                     request.setAttribute("message", "There was an error: " + ex.getMessage());
-                }
-                //Guardamos los datos del fichero en la BD
-                Users us = (Users) request.getSession().getAttribute("user");
-
-                if ((Objects.requireNonNull(us) == null ? us == null : Objects.requireNonNull(us).equals(us))) {
-
-                    UsersJpaController ujpc = new UsersJpaController();
-                    Users user = ujpc.findCreateUser(us.getEmail());
-
-                    FilesJpaController fjpc = new FilesJpaController();
-                    Files file = new Files();
-                    if (user != null) {
-
-                        file.setIdUser(user);
-                        file.setCreated(new Date());
-                        file.setNameFile(fileName);
-                        file.setUrl(filePath);
-                        fjpc.create(file);
-                        request.getSession().removeAttribute("section");
-                        request.getSession().setAttribute("section", "sectionResultUpload.jsp");
-                        redirect = "inicio.jsp";
-
-                        //response.sendRedirect("sectionResultUpload.jsp");
-                    }
-
-                } else {
-                    request.getSession().removeAttribute("errorCreateUser");
-                    request.getSession().setAttribute("errorCreateUser", "Rellene todos los campos obligatorios");
-                    redirect = "inicio.jsp";
                 }
 
             }

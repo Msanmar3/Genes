@@ -157,6 +157,15 @@ public class FilesJpaController implements Serializable {
         }
     }
 
+    public Files findFilesByUser(Integer idUser) {
+        EntityManager em = getEntityManager();
+        try {
+            return (Files) em.createNamedQuery("Files.findByUser").setParameter("idUser", idUser).getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+    
     public int getFilesCount() {
         EntityManager em = getEntityManager();
         try {
