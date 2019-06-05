@@ -7,7 +7,7 @@ package com.upo.genesmaven.services;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 class ObjectMapper {
     

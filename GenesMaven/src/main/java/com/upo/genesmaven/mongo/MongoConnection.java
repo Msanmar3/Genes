@@ -45,7 +45,6 @@ public class MongoConnection {
                     .connectionsPerHost(4)
                     .maxConnectionIdleTime((60 * 1_000))
                     .maxConnectionLifeTime((120 * 1_000));
-            
 
             MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/genesvalidator", options);
 
@@ -74,7 +73,7 @@ public class MongoConnection {
                     .connectionsPerHost(4)
                     .maxConnectionIdleTime((60 * 1_000))
                     .maxConnectionLifeTime((120 * 1_000));
-            
+
             MongoClientURI uri = new MongoClientURI("mongodb://localhost:27017/" + dataBaseName, options);
 
             logger.info("About to connect to MongoDB @ " + uri.toString());
@@ -170,7 +169,7 @@ public class MongoConnection {
         collection.insertOne(gen);
 
     }
-    
+
     public void insertCollection(Document gen, String nameCollection, String dataBaseName) {
 
         MongoCollection<Document> collection = getMongo().getDatabase(dataBaseName).getCollection(nameCollection);

@@ -6,33 +6,33 @@ import org.mongodb.morphia.annotations.Property;
 import org.mongodb.morphia.annotations.Version;
 
 public class BaseMongoDO {
-	
-	@Id
-	@Property("id")
-	private ObjectId id;
 
-	@Version
-	@Property("version")
-	private Long version;
+    @Id
+    @Property("id")
+    private ObjectId id;
 
-	public BaseMongoDO() {
-		super();
-	}
+    @Version
+    @Property("version")
+    private Long version;
 
-	public ObjectId getId() {
-		return id;
-	}
+    public BaseMongoDO() {
+        super();
+    }
 
-	public void setId(ObjectId id) {
-		this.id = id;
-	}
+    public ObjectId getId() {
+        return id;
+    }
 
-	public Long getVersion() {
-		return version;
-	}
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
 
-	public void setVersion(Long version) {
-		this.version = version;
-	}
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
+    }
 
 }

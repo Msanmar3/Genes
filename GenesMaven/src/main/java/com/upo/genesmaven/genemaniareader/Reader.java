@@ -19,7 +19,10 @@ public class Reader {
      */
     public static void main(String[] args) throws IOException {
            //     new BasicWebCrawler().getPageLinks("http://genemania.org/data/current/");
-       new WebCrawlerWithDepth().getPageLinks("http://genemania.org/data/current/", 0,1,"");
+       //new WebCrawlerWithDepth().getPageLinks("http://genemania.org/data/current/", 0,1,"");
+       //Generamos una colección con los datos de todos los identifier_mappins
+       //Mónica
+       new WebCrawlerWithDepth().getPageLinksIdentifier("http://genemania.org/data/current/", 0,1,"");
 
     }
 

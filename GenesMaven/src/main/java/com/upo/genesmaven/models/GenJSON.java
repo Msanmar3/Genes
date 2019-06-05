@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 public class GenJSON {
 

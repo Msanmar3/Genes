@@ -7,7 +7,9 @@ package com.upo.genesmaven.genemaniareader;
 
 import com.upo.genesmaven.entities.Users;
 import com.upo.genesmaven.models.Gen;
+import com.upo.genesmaven.models.Identifier;
 import com.upo.genesmaven.mongo.GenDao;
+import com.upo.genesmaven.mongo.IdentifierDao;
 import com.upo.genesmaven.mongo.MongoConnection;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -94,12 +96,31 @@ public class DBase {
         }
 
     }
+    //Mónica
+    public void importDataMongoIdentifier(String path, String specie) throws FileNotFoundException, IOException {
+        MongoConnection conn = MongoConnection.getInstance();
+        IdentifierDao gd = new IdentifierDao(conn.getDatastore());
+        String csvFile = path;
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = "\t";
+        br = new BufferedReader(new FileReader(csvFile));
+        br.readLine();
+        while ((line = br.readLine()) != null) {
+            String[] genSTR = line.split(cvsSplitBy);
+            Identifier g = new Identifier(specie, genSTR[0], genSTR[1], genSTR[2]);
+            System.out.println("GGG:" + g);
+            gd.save(g);
+
+        }
+
+    }
 
     public void importDataUser(String path, String origen, String filename, String dataBaseName, Users user) throws FileNotFoundException, IOException {
         MongoConnection conn = MongoConnection.getInstance();
         UUID uuid = UUID.randomUUID();
 
-        String nameCollection=  "Gen" + user.getIdUser()+ "_" + uuid.toString();
+        String nameCollection = "Gen" + user.getIdUser() + "_" + uuid.toString();
         //Crear la coleccion
         conn.createCollection(dataBaseName, nameCollection);
         //  conn.getMongo(dataBaseName);

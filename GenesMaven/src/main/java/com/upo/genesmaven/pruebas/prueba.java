@@ -1,7 +1,5 @@
 package com.upo.genesmaven.pruebas;
 
-
-
 import com.upo.genesmaven.genemaniareader.DBase;
 import java.io.IOException;
 /*

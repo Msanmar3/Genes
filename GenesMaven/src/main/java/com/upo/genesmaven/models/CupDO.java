@@ -2,23 +2,23 @@ package com.upo.genesmaven.models;
 
 public class CupDO extends BaseMongoDO {
 
-	private float ounces;
-	private String name;
+    private float ounces;
+    private String name;
 
-	public float getOunces() {
-		return ounces;
-	}
+    public float getOunces() {
+        return ounces;
+    }
 
-	public void setOunces(float ounces) {
-		this.ounces = ounces;
-	}
+    public void setOunces(float ounces) {
+        this.ounces = ounces;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
 }

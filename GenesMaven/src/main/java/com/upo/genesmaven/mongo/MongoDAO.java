@@ -11,7 +11,7 @@ import org.mongodb.morphia.Datastore;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 public class MongoDAO {
 
@@ -64,9 +64,5 @@ public class MongoDAO {
     public void setDataBaseName(String dataBaseName) {
         this.dataBaseName = dataBaseName;
     }
-    
-    
-    
-    
 
 }

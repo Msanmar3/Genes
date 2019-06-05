@@ -9,14 +9,14 @@ package com.upo.genesmaven.mongo;
  *
  * @author Mónica Sánchez Martín
  */
-import com.upo.genesmaven.models.Gen;
+import com.upo.genesmaven.models.Identifier;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 
-public class GenDao extends BasicDAO<Gen, ObjectId> {
+public class IdentifierDao extends BasicDAO<Identifier, ObjectId> {
 
-    public GenDao(Datastore ds) {
+    public IdentifierDao(Datastore ds) {
         super(ds);
     }
 

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 public class sertvletFormCompareGenes extends HttpServlet {
 

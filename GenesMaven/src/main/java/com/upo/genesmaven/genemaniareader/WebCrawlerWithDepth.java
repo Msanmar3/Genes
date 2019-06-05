@@ -42,14 +42,14 @@ public class WebCrawlerWithDepth {
     public WebCrawlerWithDepth(String urlBase) {
         this.urlBase = urlBase;
     }
-    
+
     public WebCrawlerWithDepth() {
         links = new HashSet<>();
         //currentDir = System.getProperty("user.dir");
-        currentDir= urlBase;
+        currentDir = urlBase;
         //clase que se encarga de importar los datos a mysql
         db = new DBase();
-      //  conn = db.connect( "jdbc:mysql://localhost:3306/genedata", "root", "artrobado");
+        //  conn = db.connect( "jdbc:mysql://localhost:3306/genedata", "root", "artrobado");
 
         //lista negra de enlaces que no debe seguir el spider
         ignores = new ArrayList();
@@ -135,13 +135,12 @@ public class WebCrawlerWithDepth {
                         String geneDir = geneDirPart[geneDirPart.length - 2];
 
                         //String geneOut = currentDir + "/src/main/java/es/upo/data/" + geneDir + "_" + geneFile;
-                         String geneOut = currentDir + "/" + geneDir + "_" + geneFile;
+                        String geneOut = currentDir + "/" + geneDir + "_" + geneFile;
                         //descargo el fichero 
                         ouput = new File(geneOut);
                         System.out.println(tab + "vv Download: " + geneOut);
                         downloadFileFromURL(URL, ouput);
 
-                        
                         System.out.println(tab + "|| Import to Database: " + geneOut);
                         //importo a mysql
                         //db.importData(conn, geneOut, geneDir + "_" + geneFile, geneFile);
@@ -159,6 +158,54 @@ public class WebCrawlerWithDepth {
                     //llamada recursiva para el siguiente url
                     for (Element page : linksOnPage) {
                         getPageLinks(page.attr("abs:href"), depth, num, tab.concat("-"));
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("For '" + URL + "': " + e.getMessage());
+            }
+        }
+    }
+    //Mónica
+    //metodo estatico que descarga e importa los ficheros identifier
+    public void getPageLinksIdentifier(String URL, int depth, int num, String tab) {
+        //punto de parada si el link ya ha sido recorrido o llegue a la profundidad maxima
+        if ((!links.contains(URL) && (depth < MAX_DEPTH))) {
+            try {
+                //saco el nombre del fichero
+                String geneFile = URL.substring(URL.lastIndexOf('/') + 1);
+                //ignoro las urls de la lista negra 
+                if (!URL.equalsIgnoreCase(ignores.get(0)) && !ignores.contains(geneFile) && geneFile.equalsIgnoreCase("identifier_mappings.txt")) {
+                    //añado el link a la lista para no repetirlo
+                    links.add(URL);
+
+                    //compruebo que el fichero exista y que sea un fichero valido
+                    if (fileExists(URL) && !geneFile.isEmpty() && !geneFile.contains("_") && !geneFile.substring(geneFile.lastIndexOf('.') + 1).contains("gmt")) {
+                        System.out.println(tab + ">> Depth: " + depth + " Num: " + num + " [" + URL + "]");
+
+                        String[] geneDirPart = URL.split("/", -1);
+                        String specie = geneDirPart[geneDirPart.length - 2];
+
+                        String geneOut = currentDir + "/" + specie + "_" + geneFile;
+                        //descargo el fichero 
+                        ouput = new File(geneOut);
+                        System.out.println(tab + "vv Download: " + geneOut);
+                        downloadFileFromURL(URL, ouput);
+
+                        System.out.println(tab + "|| Import to Database: " + geneOut);
+                        //importo a mongo los ficheros identifier
+                        db.importDataMongoIdentifier(geneOut, specie);
+                        num++;
+                    }
+
+                    //busco el siguiente enlace
+                    Document document = Jsoup.connect(URL).get();
+                    Elements linksOnPage = document.select("a[href]");
+
+                    //aummento la profundida
+                    depth++;
+                    //llamada recursiva para el siguiente url
+                    for (Element page : linksOnPage) {
+                        getPageLinksIdentifier(page.attr("abs:href"), depth, num, tab.concat("-"));
                     }
                 }
             } catch (IOException e) {
@@ -223,6 +270,4 @@ public class WebCrawlerWithDepth {
         this.conn = conn;
     }
 
-    
-    
 }

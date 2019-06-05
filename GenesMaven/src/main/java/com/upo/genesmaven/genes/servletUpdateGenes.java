@@ -7,7 +7,6 @@ package com.upo.genesmaven.genes;
 
 import com.upo.genesmaven.genemaniareader.WebCrawlerWithDepth;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author winlatop
+ * @author Mónica Sánchez Martín
  */
 public class servletUpdateGenes extends HttpServlet {
 
