@@ -32,11 +32,13 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <!--<li class="header">MENÚ</li>-->
-            <a href = "<c:url value = "/data/prueba.txt"/>">TEST</a>
-            <li class="treeview">
-                <c:choose> 
-                    <c:when test="${fn:length(listRolesMenu) gt 0}">
-                        <c:forEach items="${listRolesMenu}" var="menu">
+<!--            <a href = "<c:url value = "/data/prueba.txt"/>">TEST</a>-->
+            <!--            <li class="treeview">-->
+            <c:choose> 
+                <c:when test="${fn:length(listRolesMenu) gt 0}">
+                    <c:forEach items="${listRolesMenu}" var="menu">
+                        <li class="treeview">
+
                             <!--Si es padre (0) se pinta con el desplegable-->
                             <c:if test="${menu.getIdMenu().getIdParent() < 1}">
                                 <a href="">
@@ -63,15 +65,19 @@
                                     </c:forEach> 
                                 </ul>
                             </c:if>
-                        </c:forEach> 
-                    </c:when>  
-                    <c:otherwise>  
+                        </li>
+
+                    </c:forEach> 
+                </c:when>  
+                <c:otherwise>  
+                    <li class="treeview">
                         <ul class="treeview-menu">
                             <li><a href="index.html"><i class="fa fa-circle-o"></i> No tiene permisos.</a></li>
                         </ul>
-                    </c:otherwise>  
-                </c:choose>  
-            </li>
+                    </li>
+                </c:otherwise>  
+            </c:choose>  
+            <!--            </li>-->
         </ul>
     </section>
     <!-- /.sidebar -->

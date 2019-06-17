@@ -54,14 +54,13 @@ public class servletLogin extends HttpServlet {
 
             UsersJpaController ujpc = new UsersJpaController();
             RolesMenusJpaController rmpc = new RolesMenusJpaController();
-
+            Users user = null;
             try {
                 password = Sha1.sha1(password);
+                user = ujpc.findUsersLogin(em, password);
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(servletCreateUser.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            Users user = ujpc.findUsersLogin(em, password);
 
             if (user != null) {
 
@@ -90,8 +89,8 @@ public class servletLogin extends HttpServlet {
             }
 
         } else {
-             request.getSession().removeAttribute("errorCreateUser");
-                request.getSession().setAttribute("errorCreateUser", "Introduzca usuario y contraseña");
+            request.getSession().removeAttribute("errorCreateUser");
+            request.getSession().setAttribute("errorCreateUser", "Introduzca usuario y contraseña");
 //            request.getSession().removeAttribute("errorLogin");
 //            request.getSession().setAttribute("errorLogin", "Introduzca usuario y contraseña.");
             redirect = "index.jsp";

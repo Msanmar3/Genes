@@ -10,3 +10,6 @@
     background-color: rgb(221, 75, 57);
 
 }
+#loading_spinner{
+    display: none;
+}

@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Iterations.findByIdIteration", query = "SELECT i FROM Iterations i WHERE i.idIteration = :idIteration")
     , @NamedQuery(name = "Iterations.findByNameIteration", query = "SELECT i FROM Iterations i WHERE i.nameIteration = :nameIteration")
     , @NamedQuery(name = "Iterations.findByYear", query = "SELECT i FROM Iterations i WHERE i.year = :year")
-    , @NamedQuery(name = "Iterations.findByIdAuthor", query = "SELECT i FROM Iterations i WHERE i.idAuthor = :idAuthor")})
+    , @NamedQuery(name = "Iterations.findByIdAuthor", query = "SELECT i FROM Iterations i WHERE i.idAuthor = :idAuthor")
+    , @NamedQuery(name = "Iterations.findByIdSpecie", query = "SELECT i FROM Iterations i, IterationsSpecies ie WHERE i.idIteration = ie.idIteration AND ie.idSpecie = :idSpecie")}
+)
 public class Iterations implements Serializable {
 
     private static final long serialVersionUID = 1L;

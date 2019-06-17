@@ -5,7 +5,6 @@
  */
 package com.upo.genesmaven.mongo;
 
-import com.google.gson.Gson;
 import static java.lang.String.format;
 
 import org.apache.log4j.Logger;

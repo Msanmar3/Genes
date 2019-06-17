@@ -7,11 +7,14 @@ package com.upo.genesmaven.data;
 
 import com.upo.genesmaven.controller.AuthorsJpaController;
 import com.upo.genesmaven.controller.IterationsJpaController;
+import com.upo.genesmaven.controller.IterationsSpeciesJpaController;
 import com.upo.genesmaven.controller.SpeciesJpaController;
 import com.upo.genesmaven.entities.Authors;
 import com.upo.genesmaven.entities.Iterations;
+import com.upo.genesmaven.entities.IterationsSpecies;
 import com.upo.genesmaven.entities.Species;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Mónica Sánchez Martín
  */
-public class servletFormLoadData extends HttpServlet {
+public class servletSearchIterations extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,32 +43,21 @@ public class servletFormLoadData extends HttpServlet {
         String redirect = "error.jsp";
 
         if (session != null) {
-            SpeciesJpaController sjc = new SpeciesJpaController();
-            List<Species> listSpecies = sjc.findSpeciesEntities();
-            
-            AuthorsJpaController ajc = new AuthorsJpaController();
-            List<Authors> listAuthors = ajc.findAuthorsEntities();
+            Integer id = Integer.parseInt(request.getParameter("keyword"));
 
-            IterationsJpaController ijc = new IterationsJpaController();
-            List<Iterations> listIterations = ijc.findIterationsEntities();
-            
-            request.getSession().removeAttribute("section");
-            request.getSession().setAttribute("section", "sectionLoadData.jsp");
-            
-            request.getSession().removeAttribute("listSpecies");
-            request.getSession().setAttribute("listSpecies", listSpecies);
-            
-            request.getSession().removeAttribute("funcionesJS");
-            request.getSession().setAttribute("funcionesJS", "comboBoxLoadData.js");
-            redirect = "inicio.jsp";
+            IterationsSpeciesJpaController ijc = new IterationsSpeciesJpaController();
+            List<Iterations> listIterations = (List<Iterations>) ijc.findIterationsBySpecieSQL(id);
 
-        } else {
-            request.getSession().removeAttribute("error");
-            request.getSession().setAttribute("error", "Los datos son incorrectos.");
-            redirect = "error.jsp";
-
+            String out = "";
+            for (Iterations iteration : listIterations) {
+                out += "<option value=\"" + iteration.getIdIteration() + "\">" + iteration.getNameIteration() + "</option>";
+            }
+            System.out.println("Out:::::::" + out);
+            try (PrintWriter p = response.getWriter()) {
+                p.println(out);
+            }
         }
-        response.sendRedirect(redirect);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

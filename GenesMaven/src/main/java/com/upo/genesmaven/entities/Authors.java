@@ -29,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Authors.findAll", query = "SELECT a FROM Authors a")
     , @NamedQuery(name = "Authors.findByIdAuthor", query = "SELECT a FROM Authors a WHERE a.idAuthor = :idAuthor")
-    , @NamedQuery(name = "Authors.findByNameAuthor", query = "SELECT a FROM Authors a WHERE a.nameAuthor = :nameAuthor")})
+    , @NamedQuery(name = "Authors.findByNameAuthor", query = "SELECT a FROM Authors a WHERE a.nameAuthor = :nameAuthor")
+    , @NamedQuery(name = "Authors.findByIteration", query = "SELECT a FROM Authors a, Iterations i WHERE a.idAuthor = i.idAuthor and i.idIteration = :idIteration")
+})
 public class Authors implements Serializable {
 
     private static final long serialVersionUID = 1L;

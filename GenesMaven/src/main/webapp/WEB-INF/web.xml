@@ -113,6 +113,10 @@
         <servlet-name>servletReturnDash</servlet-name>
         <servlet-class>com.upo.genesmaven.navegation.servletReturnDash</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servletSearchIterations</servlet-name>
+        <servlet-class>com.upo.genesmaven.data.servletSearchIterations</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletLogin</servlet-name>
         <url-pattern>/servletLogin</url-pattern>
@@ -226,6 +230,10 @@
         <servlet-name>servletReturnDash</servlet-name>
         <url-pattern>/servletReturnDash</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletSearchIterations</servlet-name>
+        <url-pattern>/servletSearchIterations</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             60
@@ -234,5 +242,4 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
-    
 </web-app>
