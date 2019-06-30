@@ -27,62 +27,66 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <!-- Input addon -->
-                <div class="box box-info">
-                    <div class="box-body">
-                        <!--                        <div >
-                                                    Configurar Cytoscape
-                                                </div>-->
-                        <form role="form" action="servletLoadData" method="post" name="formLoadGenes" enctype="multipart/form-data">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Herramienta de carga de Genes.</h3> 
+                        <div id="loading_spinner">
+                            <img src="images/squares.gif" alt=""/>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+                    <form role="form" action="servletLoadData" method="post" name="formLoadGenes" enctype="multipart/form-data">
+                        <div class="box-body">
+                            <div class="form-group">
+                                <label for="species" class="col-sm-2 control-label">Especie</label>
+                                <select name="species" size="1" id="species" class="form-control">
+                                    <option value=''>Seleccione una especie</option>
+                                    <c:choose> 
+                                        <c:when test="${fn:length(listSpecies) gt 0}">
+                                            <c:forEach items="${listSpecies}" var="specie">
+                                                <option value="${specie.getIdSpecie()}"> ${specie.getNameSpecie()} </option>
+                                            </c:forEach>
+                                        </c:when>
+                                    </c:choose>
+                                </select>
+                                <p class="help-block">Seleccione la especie</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="authors" class="col-sm-2 control-label">Authors</label>
+                                <!--                                    <input type="text" class="form-control" id="secondName" name="secondName" placeholder="Segunda parte">-->
+                                <select name="authors" size="1" id="authors" class="form-control">
 
-                            <div class="form-group">
-                                <label for="origin" class="col-sm-2 control-label">Especie</label>
-                                <div class="col-sm-10">
-                                    <select name="species" size="1" id="species" class="form-control">
-                                        <c:choose> 
-                                            <c:when test="${fn:length(listSpecies) gt 0}">
-                                                <c:forEach items="${listSpecies}" var="specie">
-                                                    <option value="${specie.getIdSpecie()}"> ${specie.getNameSpecie()} </option>
-                                                </c:forEach>
-                                            </c:when>
-                                        </c:choose>
-                                    </select>
-                                    <div id="loading_spinner">
-                                        <img src="images/squares.gif" alt=""/>
-                                    </div>
-                                </div>
+                                </select>
+                                <p class="help-block">Seleccione el author</p>
                             </div>
                             <div class="form-group">
-                                <label for="firstName" class="col-sm-2 control-label">Iterations</label>
-                                <div class="col-sm-10">
-<!--                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Primera parte">-->
-                                    <select class="form-control" name="iterations" size="1" id="iterations">
-                                       
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="secondName" class="col-sm-2 control-label">Authors</label>
-                                <div class="col-sm-10">
-<!--                                    <input type="text" class="form-control" id="secondName" name="secondName" placeholder="Segunda parte">-->
-                                    <select name="authors" size="1" id="authors" class="form-control">
-                                       
-                                    </select>
-                                </div>
+                                <label for="iterations" class="col-sm-2 control-label">Iterations</label>
+                                <!--                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Primera parte">-->
+                                <select class="form-control" name="iterations" size="1" id="iterations">
+
+                                </select>
+                                <p class="help-block">Seleccione la iteraci&oacute;n</p>
                             </div>
                             <div class="form-group">
                                 <label>Archivo:</label>
                                 <input type="file" name="uploadFile"/>
+                                <p class="help-block">Seleccione el fichero de datos</p>
                             </div>
+
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+
                             <input type="hidden" name="opcion" value="${user.getIdUser()}">
                             <button type="submit" class="btn btn-primary" value="Upload" >Cargar genes</button>
                             <button type="reset" class="btn btn-warning">Reiniciar subida</button>
-                        </form> 
-                        <!-- /input-group -->
-                    </div>
-                    <!-- /.box-body -->
+                        </div>
+                    </form>
                 </div>
-                <!-- /.box -->
+
+
             </div>
         </div>
     </section>

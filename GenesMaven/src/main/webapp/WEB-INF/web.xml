@@ -117,6 +117,14 @@
         <servlet-name>servletSearchIterations</servlet-name>
         <servlet-class>com.upo.genesmaven.data.servletSearchIterations</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>servletSearchAuthors</servlet-name>
+        <servlet-class>com.upo.genesmaven.data.servletSearchAuthors</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>servletMyData</servlet-name>
+        <servlet-class>com.upo.genesmaven.genes.servletMyData</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>servletLogin</servlet-name>
         <url-pattern>/servletLogin</url-pattern>
@@ -233,6 +241,14 @@
     <servlet-mapping>
         <servlet-name>servletSearchIterations</servlet-name>
         <url-pattern>/servletSearchIterations</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletSearchAuthors</servlet-name>
+        <url-pattern>/servletSearchAuthors</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>servletMyData</servlet-name>
+        <url-pattern>/servletMyData</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

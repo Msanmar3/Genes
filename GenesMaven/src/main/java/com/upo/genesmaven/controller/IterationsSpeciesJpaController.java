@@ -147,13 +147,18 @@ public class IterationsSpeciesJpaController implements Serializable {
        
     }
     
-    public List<Iterations> findIterationsBySpecieSQL(Integer idSpecie) {
+    public List<Iterations> findIterationsBySpecieSQL(Integer idSpecie, Integer idAuthor) {
         EntityManager em = getEntityManager();
         
-         List<Iterations> listIterations = new ArrayList<>();
+        List<Iterations> listIterations = new ArrayList<>();
+         
         try {
-            listIterations.add((Iterations) em.createNativeQuery("Select i.* from Iterations i , IterationSpecie ie Where i.idIteration = ie.idIteration AND ie.idSpecie= '"+idSpecie+"'", Iterations.class));
-            
+            Query q = em.createNativeQuery("Select i.* from iterations i , iterations_species ie "
+                    + "Where i.id_iteration = ie.id_iteration "
+                    + "AND ie.id_specie= '"+idSpecie+"' "
+                    + "AND i.id_author= '"+idAuthor+"'", Iterations.class);
+            listIterations = q.getResultList();
+//            System.out.println("aux!!!" + aux);
             return listIterations;
         } catch (NoResultException e) {
             return null;

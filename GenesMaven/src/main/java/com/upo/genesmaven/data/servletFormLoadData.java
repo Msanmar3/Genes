@@ -5,11 +5,7 @@
  */
 package com.upo.genesmaven.data;
 
-import com.upo.genesmaven.controller.AuthorsJpaController;
-import com.upo.genesmaven.controller.IterationsJpaController;
 import com.upo.genesmaven.controller.SpeciesJpaController;
-import com.upo.genesmaven.entities.Authors;
-import com.upo.genesmaven.entities.Iterations;
 import com.upo.genesmaven.entities.Species;
 import java.io.IOException;
 import java.util.List;
@@ -43,11 +39,11 @@ public class servletFormLoadData extends HttpServlet {
             SpeciesJpaController sjc = new SpeciesJpaController();
             List<Species> listSpecies = sjc.findSpeciesEntities();
             
-            AuthorsJpaController ajc = new AuthorsJpaController();
-            List<Authors> listAuthors = ajc.findAuthorsEntities();
-
-            IterationsJpaController ijc = new IterationsJpaController();
-            List<Iterations> listIterations = ijc.findIterationsEntities();
+//            AuthorsJpaController ajc = new AuthorsJpaController();
+//            List<Authors> listAuthors = ajc.findAuthorsEntities();
+//
+//            IterationsJpaController ijc = new IterationsJpaController();
+//            List<Iterations> listIterations = ijc.findIterationsEntities();
             
             request.getSession().removeAttribute("section");
             request.getSession().setAttribute("section", "sectionLoadData.jsp");

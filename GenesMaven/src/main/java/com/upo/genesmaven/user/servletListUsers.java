@@ -40,6 +40,8 @@ public class servletListUsers extends HttpServlet {
             request.getSession().setAttribute("usersList", ujpc.findUsersEntities());
             request.getSession().removeAttribute("section");
             request.getSession().setAttribute("section", "sectionListUsers.jsp");
+            request.getSession().removeAttribute("funcionesJS");
+            request.getSession().setAttribute("funcionesJS", "styleTable.js");
             redirect = "inicio.jsp";
 
         }

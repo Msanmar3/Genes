@@ -6,11 +6,7 @@
 package com.upo.genesmaven.data;
 
 import com.upo.genesmaven.controller.AuthorsJpaController;
-import com.upo.genesmaven.controller.IterationsJpaController;
-import com.upo.genesmaven.controller.SpeciesJpaController;
-import com.upo.genesmaven.entities.Authors;
-import com.upo.genesmaven.entities.Iterations;
-import com.upo.genesmaven.entities.Species;
+import com.upo.genesmaven.entities.AuthorsYear;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -39,21 +35,27 @@ public class servletSearchAuthors extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         String redirect = "error.jsp";
+        PrintWriter p = response.getWriter();
+        System.out.println("servtletSearchAuthors");
 
         if (session != null) {
             Integer id = Integer.parseInt(request.getParameter("keyword"));
 
             AuthorsJpaController ijc = new AuthorsJpaController();
-            List<Authors> listAuthors = (List<Authors>) ijc.findAuthorByIteration(id);
+            List<AuthorsYear> listAuthors = (List<AuthorsYear>) ijc.findAuthorBySpecie(id);
 
-            String out = "";
-            for (Authors authors : listAuthors) {
-                out += "<option value=\"" + authors.getIdAuthor()+ "\">" + authors.getNameAuthor() + "</option>";
+            String out = "<option value=''>Seleccione un author</option>";
+            for (AuthorsYear authors : listAuthors) {
+                if (authors.getYear() == null) {
+                    out += "<option value=\"" + authors.getIdAuthor() + "\">" + authors.getNameAuthor() + "</option>";
+
+                } else {
+                    out += "<option value=\"" + authors.getIdAuthor() + "\">" + authors.getNameAuthor() + "-" + authors.getYear() + "</option>";
+                }
             }
             System.out.println("Out:::::::" + out);
-            try (PrintWriter p = response.getWriter()) {
-                p.println(out);
-            }
+            p.println(out);
+
         }
 
     }

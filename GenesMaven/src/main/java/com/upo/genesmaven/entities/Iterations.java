@@ -48,7 +48,7 @@ public class Iterations implements Serializable {
     @Column(name = "name_iteration")
     private String nameIteration;
     @Column(name = "year")
-    private Integer year;
+    private String year;
     @Basic(optional = false)
     @NotNull
     @Column(name = "id_author")
@@ -83,11 +83,11 @@ public class Iterations implements Serializable {
         this.nameIteration = nameIteration;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

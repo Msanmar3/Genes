@@ -5,14 +5,8 @@
  */
 package com.upo.genesmaven.data;
 
-import com.upo.genesmaven.controller.AuthorsJpaController;
-import com.upo.genesmaven.controller.IterationsJpaController;
 import com.upo.genesmaven.controller.IterationsSpeciesJpaController;
-import com.upo.genesmaven.controller.SpeciesJpaController;
-import com.upo.genesmaven.entities.Authors;
 import com.upo.genesmaven.entities.Iterations;
-import com.upo.genesmaven.entities.IterationsSpecies;
-import com.upo.genesmaven.entities.Species;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -41,21 +35,23 @@ public class servletSearchIterations extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         String redirect = "error.jsp";
-
+        PrintWriter p = response.getWriter();
+        System.out.println("sertletSearchITerations");
         if (session != null) {
-            Integer id = Integer.parseInt(request.getParameter("keyword"));
+            Integer idSpecie= Integer.parseInt(request.getParameter("specie"));
+            Integer idAuthor = Integer.parseInt(request.getParameter("author"));
 
             IterationsSpeciesJpaController ijc = new IterationsSpeciesJpaController();
-            List<Iterations> listIterations = (List<Iterations>) ijc.findIterationsBySpecieSQL(id);
+            List<Iterations> listIterations = (List<Iterations>) ijc.findIterationsBySpecieSQL(idSpecie,idAuthor );
 
-            String out = "";
+            String out = "<option value=''>Seleccione una iteración</option>";
             for (Iterations iteration : listIterations) {
                 out += "<option value=\"" + iteration.getIdIteration() + "\">" + iteration.getNameIteration() + "</option>";
             }
             System.out.println("Out:::::::" + out);
-            try (PrintWriter p = response.getWriter()) {
-                p.println(out);
-            }
+
+            p.println(out);
+
         }
 
     }

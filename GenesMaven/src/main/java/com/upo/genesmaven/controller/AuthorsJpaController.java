@@ -7,12 +7,15 @@ package com.upo.genesmaven.controller;
 
 import com.upo.genesmaven.controller.exceptions.NonexistentEntityException;
 import com.upo.genesmaven.entities.Authors;
+import com.upo.genesmaven.entities.AuthorsYear;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -126,11 +129,39 @@ public class AuthorsJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public Authors findAuthorByIteration(Integer idIteration) {
         EntityManager em = getEntityManager();
         try {
             return (Authors) em.createNamedQuery("Authors.findByIteration").setParameter("idIteration", idIteration).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<AuthorsYear> findAuthorBySpecie(Integer idSpecie) {
+        EntityManager em = getEntityManager();
+        
+        List<Object[]> list = new ArrayList<>();
+         
+        try {
+            //TODO Ordenar por author
+            Query q = em.createNativeQuery("Select a.id_author, a.name_author, i.year "
+                    + "from iterations i , iterations_species ie, authors a "
+                    + "Where a.id_author = i.id_author "
+                    + "AND i.id_iteration = ie.id_iteration "
+                    + "AND ie.id_specie= '"+idSpecie+"' "
+                    + "ORDER BY a.name_author");
+            list = q.getResultList();
+//            System.out.println("aux!!!" + aux);
+            List<AuthorsYear> listaAuthors= new ArrayList();
+            for (Object[] a : list) {
+                AuthorsYear aux = new AuthorsYear((Integer)a[0], (String)a[1], (String)a[2]);
+                listaAuthors.add(aux);
+            }
+            return listaAuthors;
+        } catch (NoResultException e) {
+            return null;
         } finally {
             em.close();
         }
@@ -148,5 +179,5 @@ public class AuthorsJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 }

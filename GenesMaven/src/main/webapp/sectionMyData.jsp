@@ -1,16 +1,16 @@
 <%-- 
-    Document   : sectionListGenes
+    Document   : sectionMyData
     Author     : Mónica Sánchez Martín
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="filesList" scope="session" value="${filesList}"/>
+<c:set var="usersList" scope="session" value="${usersList}"/>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Tabla de Ficheros
+            My Data table
         </h1>
     </section>
 
@@ -30,8 +30,8 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Usuario</th>
-                                    <th>Nombre fichero</th>
+                                    <th>Nombre del usuario</th>
+                                    <th>Nombre del fichero</th>
                                     <th>Fecha</th>
                                     <th>Operaciones</th>
                                 </tr>
@@ -42,9 +42,20 @@
                                         <tr>
                                             <td>${fileL.getIdUser().getNameUser()}</td>
                                             <td>${fileL.getNameFile()}</td>
-                                            <td>${fileLfileL.getCreated()}</td>
+                                            <td>${fileL.getCreated()}</td>
                                             <td>
-                                                
+                                                <c:url value="servletFormUpdateUser" var="idUserUrlUpdate">
+                                                    <c:param name="idUserUrlUpdate" value="${fileL.getIdUser()}"/>
+                                                </c:url>
+                                                <a href="<c:out value="${idUserUrlUpdate}"/>">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <c:url value="servletDeleteFile" var="idFileUrlDelete">
+                                                    <c:param name="idFileUrlDelete" value="${fileL.getIdUser()}"/>
+                                                </c:url>
+                                                <a href="<c:out value="${idFileUrlDelete}"/>">
+                                                    <i class="fa fa-trash-o"></i>                                      
+                                                </a>
                                             </td>
                                         </c:forEach> 
 
@@ -52,8 +63,8 @@
                                 </c:if>
                             <tfoot>
                                 <tr>
-                                     <th>Usuario</th>
-                                    <th>Nombre fichero</th>
+                                    <th>Nombre del usuario</th>
+                                    <th>Nombre del fichero</th>
                                     <th>Fecha</th>
                                     <th>Operaciones</th>
                                 </tr>

@@ -13,9 +13,11 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import com.upo.genesmaven.entities.Users;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
 /**
@@ -157,13 +159,24 @@ public class FilesJpaController implements Serializable {
         }
     }
 
-    public Files findFilesByUser(Integer idUser) {
-        EntityManager em = getEntityManager();
+    public List<Files> findFilesByUser(String idUser) {
+//        EntityManager em = getEntityManager();
+//        try {
+//            return (Files) em.createNamedQuery("Files.findByUser").setParameter("idUser", idUser).getSingleResult();
+//        } finally {
+//            em.close();
+//        }
+EntityManager em = getEntityManager();
+        List<Files> listFiles = new ArrayList<Files>();
         try {
-            return (Files) em.createNamedQuery("Files.findByUser").setParameter("idUser", idUser).getSingleResult();
+            listFiles.add((Files)em.createNamedQuery("Files.findByUser").setParameter("idUser", idUser).getSingleResult());
+        } catch (NoResultException e) {
+            return null;
         } finally {
             em.close();
         }
+        
+        return listFiles;
     }
     
     public int getFilesCount() {

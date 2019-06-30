@@ -96,9 +96,9 @@ public class servletLoadData extends HttpServlet {
                             }
                         }
 
-                        if (hmap.get("origin") != null && hmap.get("firstName") != null && hmap.get("secondName") != null) {
+                        if (hmap.get("species") != null && hmap.get("authors") != null && hmap.get("iterations") != null) {
                             try {
-                                d.importDataUser(filePath, hmap.get("origin"), hmap.get("firstName") + "_" + hmap.get("secondName"), "genesUser", us);
+                                d.importDataUser(filePath, hmap.get("species"), hmap.get("authors") + "_" + hmap.get("iterations"), "genesUser", us);
 
                                 UsersJpaController ujpc = new UsersJpaController();
                                 Users user = ujpc.findCreateUser(us.getEmail());
@@ -112,11 +112,11 @@ public class servletLoadData extends HttpServlet {
                                     file.setNameFile(fileName);
                                     file.setUrl(filePath);
                                     fjpc.create(file);
-                                    request.getSession().removeAttribute("section");
-                                    request.getSession().setAttribute("section", "sectionResultUpload.jsp");
+//                                    request.getSession().removeAttribute("section");
+//                                    request.getSession().setAttribute("section", "sectionResultUpload.jsp");
                                     redirect = "inicio.jsp";
 
-                                    response.sendRedirect("sectionResultUpload.jsp");
+                                    response.sendRedirect("servletMyData");
                                 }
                             } catch (FileNotFoundException e) {
                                 File f = new File(filePath);

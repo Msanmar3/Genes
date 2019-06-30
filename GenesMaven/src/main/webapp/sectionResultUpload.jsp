@@ -1,7 +1,7 @@
 <%-- 
     Document   : sectionResultUpload
     Created on : 11-feb-2019, 21:14:18
-    Author     : winlatop
+    Author     : Mónica Sánchez Martín
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
